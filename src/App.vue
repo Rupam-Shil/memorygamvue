@@ -17,5 +17,9 @@ body {
 }
 :root {
 	--dark-bg: #162938;
+	--white: #fff;
+	--text-color: #054474;
+	--unchecked: #bacdda;
+	--yellow: #fca215;
 }
 </style>
