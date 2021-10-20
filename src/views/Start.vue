@@ -28,6 +28,7 @@
 				</div>
 			</div>
 		</header>
+		<Guesscard />
 	</section>
 </template>
 
@@ -35,6 +36,7 @@
 import { ref, onMounted } from 'vue';
 import Loader from '../components/Loader';
 import Buttonone from '../components/Buttonone.vue';
+import Guesscard from '../components/Guesscard.vue';
 
 const isLoading = ref(true);
 
@@ -48,10 +50,17 @@ onMounted(() => {
 <style lang="scss" scoped>
 section {
 	width: 100vw;
+	max-width: 1200px;
+	margin: 0 auto;
 	height: 100vh;
 	background: var(--light-bg);
 	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 	header {
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
