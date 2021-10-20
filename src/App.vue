@@ -17,9 +17,11 @@ body {
 }
 :root {
 	--dark-bg: #162938;
+	--light-bg: #fcfcfc;
 	--white: #fff;
 	--text-color: #054474;
 	--unchecked: #bacdda;
 	--yellow: #fca215;
+	--grey-text: #8c939c;
 }
 </style>

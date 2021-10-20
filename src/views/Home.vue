@@ -73,6 +73,7 @@ import Maincard from '../components/Maincard.vue';
 import Buttonone from '../components/Buttonone.vue';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
 //input binging
 const themeInput = ref('number');
 const playerInput = ref('1');
@@ -87,6 +88,13 @@ const updateValue = () => {
 		size: parseInt(sizeInput.value),
 	};
 	store.commit('updateMutations', data);
+	pushToStart();
+};
+//Route
+const router = useRouter();
+
+const pushToStart = () => {
+	router.push('/start');
 };
 </script>
 
