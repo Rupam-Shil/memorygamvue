@@ -14,6 +14,7 @@ export default createStore({
 			state.selectedCard.push(payload);
 		},
 		changeCardArray(state, payload) {
+			state.selectedCard = [];
 			state.cardArray = [];
 			for (let i of payload) {
 				state.cardArray.push({
@@ -44,15 +45,15 @@ export default createStore({
 				for (const card of state.selectedCard) {
 					setTimeout(() => {
 						commit('makeMatched', [true, card]);
+						commit('clearSelectCard');
 					}, 500);
 				}
-				commit('clearSelectCard');
 			} else {
 				setTimeout(() => {
 					for (const card of state.selectedCard) {
 						commit('makeActive', [false, card]);
+						commit('clearSelectCard');
 					}
-					commit('clearSelectCard');
 				}, 500);
 			}
 		},

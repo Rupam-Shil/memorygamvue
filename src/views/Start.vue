@@ -11,12 +11,14 @@
 						bgColor="var(--yellow)"
 						color="var(--white)"
 						class="mobile-hide"
+						@clicked="reloadGame"
 						>Restart</Buttonone
 					>
 					<Buttonone
 						bgColor="var(--unchecked)"
 						color="var(--text-color)"
 						class="mobile-hide"
+						@clicked="pushToMainMenu"
 						>New Game</Buttonone
 					>
 					<Buttonone
@@ -36,15 +38,27 @@
 import { ref, onMounted } from 'vue';
 import Loader from '../components/Loader';
 import Buttonone from '../components/Buttonone.vue';
-import Guesscard from '../components/Guesscard.vue';
+import Guesscard from '../components/Guesscard';
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+import { createCard } from '../composables/generateCard';
 
 const isLoading = ref(true);
+const router = useRouter();
+const store = useStore();
 
 onMounted(() => {
 	setTimeout(() => {
 		isLoading.value = false;
 	}, 2000);
 });
+const pushToMainMenu = () => {
+	router.push('/');
+};
+
+const reloadGame = () => {
+	createCard();
+};
 </script>
 
 <style lang="scss" scoped>

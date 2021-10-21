@@ -13,6 +13,7 @@
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import Circleeach from '../components/Circleeach.vue';
+import { createCard } from '../composables/generateCard';
 
 const store = useStore();
 
@@ -21,17 +22,6 @@ const startValue = computed(() => store.state.startValue);
 const arr = ref(new Array(startValue.value.size * startValue.value.size));
 
 //create card
-const createCard = () => {
-	const set = new Set();
-	const setSize = Math.pow(startValue.value.size, 2) / 2;
-	while (set.size < setSize) {
-		const randomSeed = Math.floor(Math.random() * 20);
-		set.add(randomSeed);
-	}
-	const arr = [...set, ...set];
-	const randArr = arr.sort(() => Math.random() - 0.5);
-	store.commit('changeCardArray', randArr);
-};
 createCard();
 </script>
 

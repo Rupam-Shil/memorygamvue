@@ -7,7 +7,7 @@
 	>
 		<div class="circle-front">
 			<span v-if="startValue.theme == 'number'">{{ val.value }}</span>
-			<img :src="require(`@/assets/${val}.png`)" alt="" v-else />
+			<img :src="require(`@/assets/${val.value}.png`)" alt="" v-else />
 		</div>
 		<div class="circle-back"></div>
 	</div>
