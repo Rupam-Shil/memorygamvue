@@ -1,6 +1,11 @@
 <template>
 	<div class="game-container" :class="[startValue.size == 6 ? 'g-6' : 'g-4']">
-		<Circleeach v-for="i in arr" :key="i" />
+		<Circleeach
+			v-for="(val, index) in store.state.cardArray"
+			:key="index"
+			:val="val"
+			:index="index"
+		/>
 	</div>
 </template>
 
@@ -14,6 +19,20 @@ const store = useStore();
 const startValue = computed(() => store.state.startValue);
 
 const arr = ref(new Array(startValue.value.size * startValue.value.size));
+
+//create card
+const createCard = () => {
+	const set = new Set();
+	const setSize = Math.pow(startValue.value.size, 2) / 2;
+	while (set.size < setSize) {
+		const randomSeed = Math.floor(Math.random() * 20);
+		set.add(randomSeed);
+	}
+	const arr = [...set, ...set];
+	const randArr = arr.sort(() => Math.random() - 0.5);
+	store.commit('changeCardArray', randArr);
+};
+createCard();
 </script>
 
 <style lang="scss" scoped>

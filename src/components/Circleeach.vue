@@ -1,20 +1,48 @@
 <template>
-	<div class="circle" @click="clicked" ref="circle">
-		<div class="circle-front"></div>
+	<div
+		class="circle"
+		:class="[val.isActive ? 'active' : '', val.isMatched ? 'matched' : '']"
+		@click="clicked"
+		ref="circle"
+	>
+		<div class="circle-front">
+			<span v-if="startValue.theme == 'number'">{{ val.value }}</span>
+			<img :src="require(`@/assets/${val}.png`)" alt="" v-else />
+		</div>
 		<div class="circle-back"></div>
 	</div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, defineProps, computed } from 'vue';
+import { useStore } from 'vuex';
 
 const circle = ref('');
+// const isActive = ref(false);
+// const isMatched = ref(false);
+
+const store = useStore();
+const startValue = computed(() => store.state.startValue);
+const selectedCard = computed(() => store.state.selectedCard);
+
+const props = defineProps({
+	val: {},
+	index: Number,
+});
 
 const clicked = () => {
-	circle.value.classList.add('active');
-};
+	if (props.val.isActive || props.val.isMatched) {
+		return;
+	}
+	store.commit('makeActive', [true, props.index]);
 
-onMounted(() => {});
+	if (selectedCard.value.length <= 1) {
+		store.commit('pushToSelectCard', props.index);
+		if (selectedCard.value.length === 2) {
+			store.dispatch('checkMatched');
+		}
+	}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -43,6 +71,14 @@ onMounted(() => {});
 		color: var(--white);
 		font-size: 2rem;
 		font-weight: 600;
+		img {
+			width: 60px;
+			height: 60px;
+			@media only screen and (max-width: 760px) {
+				width: 40px;
+				height: 40px;
+			}
+		}
 	}
 	&-back {
 		background: var(--dark-bg);
