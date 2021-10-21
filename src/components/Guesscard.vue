@@ -18,9 +18,7 @@ const arr = ref(new Array(startValue.value.size * startValue.value.size));
 
 <style lang="scss" scoped>
 .game-container {
-	width: 100%;
 	max-width: 700px;
-	min-height: 30rem;
 	height: max-content;
 	padding: 1rem;
 	display: grid;
