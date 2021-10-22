@@ -57,7 +57,7 @@ const pushToMainMenu = () => {
 };
 
 const reloadGame = () => {
-	createCard();
+	store.commit('visibilityHidden');
 };
 </script>
 

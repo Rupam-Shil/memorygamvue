@@ -35,6 +35,14 @@ export default createStore({
 			const [value, index] = payload;
 			state.cardArray[index].isMatched = value;
 		},
+		visibilityHidden(state, payload) {
+			state.selectedCard = [];
+
+			state.cardArray.forEach((card) => {
+				card.isActive = false;
+				card.isMatched = false;
+			});
+		},
 	},
 	actions: {
 		checkMatched({ state, commit }) {
