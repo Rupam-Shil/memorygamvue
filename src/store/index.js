@@ -5,6 +5,7 @@ export default createStore({
 		startValue: {},
 		selectedCard: [],
 		cardArray: [],
+		playersArray: [],
 	},
 	mutations: {
 		updateMutations(state, payload) {
@@ -42,6 +43,17 @@ export default createStore({
 				card.isActive = false;
 				card.isMatched = false;
 			});
+		},
+		createPlayerArr(state, payload) {
+			state.playersArray = [];
+			for (let i = 0; i < state.startValue.player; i++) {
+				state.playersArray.push({
+					id: i,
+					score: 0,
+					isCurrent: false,
+					winner: false,
+				});
+			}
 		},
 	},
 	actions: {

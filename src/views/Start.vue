@@ -25,12 +25,14 @@
 						bgColor="var(--yellow)"
 						color="var(--white)"
 						class="desktop-hide"
+						@clicked="pushToMainMenu"
 						>Menu</Buttonone
 					>
 				</div>
 			</div>
 		</header>
 		<Guesscard />
+		<Players />
 	</section>
 </template>
 
@@ -39,6 +41,7 @@ import { ref, onMounted } from 'vue';
 import Loader from '../components/Loader';
 import Buttonone from '../components/Buttonone.vue';
 import Guesscard from '../components/Guesscard';
+import Players from '../components/Players.vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import { createCard } from '../composables/generateCard';
