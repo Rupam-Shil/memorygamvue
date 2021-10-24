@@ -86,23 +86,24 @@ export default createStore({
 				state.cardArray[state.selectedCard[1]].value
 			) {
 				commit('increasePoint', state.dummyPlayer);
-
+				commit('calcId');
 				for (const card of state.selectedCard) {
 					setTimeout(() => {
 						commit('makeMatched', [true, card]);
 						commit('clearSelectCard');
+						commit('makerPlayerActive', state.dummyPlayer);
 					}, 500);
 				}
 			} else {
+				commit('calcId');
 				setTimeout(() => {
 					for (const card of state.selectedCard) {
 						commit('makeActive', [false, card]);
 						commit('clearSelectCard');
+						commit('makerPlayerActive', state.dummyPlayer);
 					}
 				}, 500);
 			}
-			commit('calcId');
-			commit('makerPlayerActive', state.dummyPlayer);
 		},
 	},
 	modules: {},
