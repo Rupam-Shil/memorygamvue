@@ -3,6 +3,7 @@
 		<Playercard
 			v-for="(player, index) in store.state.playersArray"
 			:key="index"
+			:player="player"
 		/>
 	</div>
 </template>
@@ -19,7 +20,11 @@ store.commit('createPlayerArr');
 <style lang="scss" scoped>
 .playercard-container {
 	width: 100%;
-	display: flex;
-	gap: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+	column-gap: 1rem;
+	row-gap: 2rem;
+	justify-content: space-between;
+	align-items: center;
 }
 </style>
