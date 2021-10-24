@@ -6,6 +6,7 @@ export default createStore({
 		selectedCard: [],
 		cardArray: [],
 		playersArray: [],
+		dummyPlayer: 0,
 	},
 	mutations: {
 		updateMutations(state, payload) {
@@ -15,6 +16,7 @@ export default createStore({
 			state.selectedCard.push(payload);
 		},
 		changeCardArray(state, payload) {
+			state.dummyPlayer = 0;
 			state.selectedCard = [];
 			state.cardArray = [];
 			for (let i of payload) {
@@ -38,6 +40,7 @@ export default createStore({
 		},
 		visibilityHidden(state, payload) {
 			state.selectedCard = [];
+			state.dummyPlayer = 0;
 
 			state.cardArray.forEach((card) => {
 				card.isActive = false;
@@ -47,13 +50,33 @@ export default createStore({
 		createPlayerArr(state, payload) {
 			state.playersArray = [];
 			for (let i = 0; i < state.startValue.player; i++) {
+				let isCurrent;
+				if (i == 0) {
+					isCurrent = true;
+				} else {
+					isCurrent = false;
+				}
 				state.playersArray.push({
 					id: i,
 					score: 0,
-					isCurrent: false,
+					isCurrent,
 					winner: false,
 				});
 			}
+		},
+		makerPlayerActive(state, payload) {
+			state.playersArray.forEach((player) => {
+				player.isCurrent = false;
+			});
+			state.playersArray[payload].isCurrent = true;
+		},
+		calcId(state, payload) {
+			const tempId = state.dummyPlayer + 1;
+			const getId = tempId % state.startValue.player;
+			state.dummyPlayer = getId;
+		},
+		increasePoint(state, payload) {
+			state.playersArray[payload].score += 1;
 		},
 	},
 	actions: {
@@ -62,6 +85,8 @@ export default createStore({
 				state.cardArray[state.selectedCard[0]].value ===
 				state.cardArray[state.selectedCard[1]].value
 			) {
+				commit('increasePoint', state.dummyPlayer);
+
 				for (const card of state.selectedCard) {
 					setTimeout(() => {
 						commit('makeMatched', [true, card]);
@@ -76,6 +101,8 @@ export default createStore({
 					}
 				}, 500);
 			}
+			commit('calcId');
+			commit('makerPlayerActive', state.dummyPlayer);
 		},
 	},
 	modules: {},
