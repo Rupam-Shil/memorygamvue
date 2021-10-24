@@ -47,6 +47,7 @@ const clicked = () => {
 
 <style lang="scss" scoped>
 .circle {
+	user-select: none;
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;

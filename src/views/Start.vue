@@ -60,7 +60,7 @@ const pushToMainMenu = () => {
 };
 
 const reloadGame = () => {
-	store.commit('visibilityHidden');
+	store.dispatch('restartGame');
 };
 </script>
 

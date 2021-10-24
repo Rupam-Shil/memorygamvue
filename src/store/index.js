@@ -38,7 +38,7 @@ export default createStore({
 			const [value, index] = payload;
 			state.cardArray[index].isMatched = value;
 		},
-		visibilityHidden(state, payload) {
+		visibilityHidden(state) {
 			state.selectedCard = [];
 			state.dummyPlayer = 0;
 
@@ -47,7 +47,7 @@ export default createStore({
 				card.isMatched = false;
 			});
 		},
-		createPlayerArr(state, payload) {
+		createPlayerArr(state) {
 			state.playersArray = [];
 			for (let i = 0; i < state.startValue.player; i++) {
 				let isCurrent;
@@ -104,6 +104,10 @@ export default createStore({
 					}
 				}, 500);
 			}
+		},
+		restartGame({ commit }) {
+			commit('visibilityHidden');
+			commit('createPlayerArr');
 		},
 	},
 	modules: {},
